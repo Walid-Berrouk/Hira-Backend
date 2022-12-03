@@ -11,6 +11,7 @@ const { getUsers, addUser, getUser, modifyUser, deleteUser } = require("./contro
 const { getQuestions, addCV } = require("./controllers/signUp")
 const signIn = require("./controllers/signIn")
 const verifyToken = require("./middlewares/verifyToken")
+const { getOpportunities } = require("./controllers/opportunities")
 
 
 // Init the app
@@ -53,6 +54,9 @@ app.post('/api/signIn', signIn)
 // Sign Up
 app.get('/questions', getUsers)
 app.put('/user/:id', addCV)
+
+// Opportunities 
+app.get('/opportunities', getOpportunities)
 
 // Listen on a port
 
