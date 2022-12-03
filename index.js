@@ -1,10 +1,17 @@
+
+// Modules
 const express = require("express")
 const cors = require('cors')
-const { getUsers, addUser, getUser, modifyUser, deleteUser } = require("./controllers/users")
-// const login = require("./controllers/login")
-// const verifyToken = require("./middlewares/verifyToken")
+require("dotenv").config()
 const jwt = require('jsonwebtoken');
 const morgan = require("morgan")
+
+// Controllers
+const { getUsers, addUser, getUser, modifyUser, deleteUser } = require("./controllers/users")
+const { getQuestions, addCV } = require("./controllers/signUp")
+const signIn = require("./controllers/signIn")
+const verifyToken = require("./middlewares/verifyToken")
+
 
 // Init the app
 const app = express()
@@ -15,7 +22,9 @@ app.use(express.json())
 app.use(express.urlencoded())
 app.use(morgan())
 
-const secretKey = 'youCantCatchme098765%^&*##@'
+
+
+const secretKey = process.env.secretKey
 
 // File serving
 // app.use('/static', express.static('public'))
@@ -39,8 +48,11 @@ app.put('/user/:id', modifyUser)
 app.delete('/user/:id', deleteUser)
 
 // Login
-// app.post('/api/login', login)
+app.post('/api/signIn', signIn)
 
+// Sign Up
+app.get('/questions', getUsers)
+app.put('/user/:id', addCV)
 
 // Listen on a port
 
